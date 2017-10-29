@@ -28,8 +28,8 @@ class CreateInitialTable extends AbstractMigration
      */
     public function change()
     {
-        $this->table('box_volumes', ['id' => false, 'primary_key' => 'box_type'])
-            ->addColumn('box_type', 'char', ['length' => 2, 'comment' => 'тип тары'])
+        $this->table('box_volumes', ['id' => false, 'primary_key' => 'type'])
+            ->addColumn('type', 'char', ['length' => 2, 'comment' => 'тип тары'])
             ->addColumn('volume', 'integer', ['comment' => 'объем (литр)'])
             ->create();
 
@@ -37,7 +37,6 @@ class CreateInitialTable extends AbstractMigration
             ->addColumn('shop_name', 'string', ['comment' => 'имя поставщика'])
             ->addColumn('box_type', 'char', ['length' => 2, 'comment' => 'тип тары'])
             ->addColumn('price', 'integer', ['comment' => 'цена товара'])
-            ->addForeignKey('box_type', 'box_volumes', 'box_type')
             ->create();
 
         $this->table('consumption')
