@@ -1,0 +1,16 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/db/migrations
+    seeds: %%PHINX_CONFIG_DIR%%/db/seeds
+
+environments:
+    default_migration_table: phinxlog
+    development:
+        adapter: pgsql
+        host: localhost
+        name: postgres
+        user: planoplan
+        pass: 12345
+        port: 5432
+        charset: utf8
+
+version_order: creation
