@@ -29,17 +29,17 @@ class CreateInitialTable extends AbstractMigration
     public function change()
     {
         $this->table('box_volumes', ['id' => false, 'primary_key' => 'type'])
-            ->addColumn('type', 'char', ['length' => 2, 'comment' => 'тип тары'])
+            ->addColumn('type', 'string', ['length' => 2, 'comment' => 'тип тары'])
             ->addColumn('volume', 'integer', ['comment' => 'объем (литр)'])
             ->create();
 
         $this->table('goods')
             ->addColumn('shop_name', 'string', ['comment' => 'имя поставщика'])
-            ->addColumn('box_type', 'char', ['length' => 2, 'comment' => 'тип тары'])
+            ->addColumn('box_type', 'string', ['length' => 2, 'comment' => 'тип тары'])
             ->addColumn('price', 'integer', ['comment' => 'цена товара'])
             ->create();
 
-        $this->table('consumption')
+        $this->table('consumption', ['id' => false])
             ->addColumn('consumption', 'integer', ['comment' => 'расход (литр/метр кв.)'])
             ->create();
     }
