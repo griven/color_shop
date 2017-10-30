@@ -92,4 +92,17 @@ class Calculate
             $query->execute([$pricePerMeter, $id]);
         }
     }
+
+    public function calcResult(float $squareMeters)
+    {
+        $consumption = $this->getConsumption();
+        $needLiters = $squareMeters * $consumption;
+        $shopName = 'alfa';
+        $goods = implode(',', [5, 5]);
+        $totalPrice = 200;
+        $pricePerMeter = 20;
+        $remain = 10;
+
+        return compact('squareMeters', 'consumption', 'needLiters', 'shopName', 'goods', 'totalPrice', 'pricePerMeter', 'remain');
+    }
 }

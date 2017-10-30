@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Slim 3</title>
+        <title>Тестовое задание</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <style>
             body {
@@ -23,16 +23,57 @@
                 font-weight: 200;
                 margin-bottom: 0;
             }
+            input {
+                font-size: 24px;
+                width: 100px;
+            }
+
+            table {
+                margin: 20px auto;
+            }
+            td {
+                border-style: solid;
+                border-color: black;
+                padding: 10px;
+            }
         </style>
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
+        <h1>Планоплан</h1>
+        <div>Рассчет количества краски для площади</div>
 
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
-        <?php endif; ?>
+        <form action="/">
+            <label for="square_meters">площадь</label>
+            <input type="number" step="0.1" name="square_meters"
+                <?php if($squareMeters): ?>
+                   value="<?= $squareMeters ?>"
+                <?php endif ?>
+            >м2
+            <input type="submit" placeholder="Рассчитать">
+        </form>
+    <?php if($needLiters): ?>
+        <table>
+            <thead>
+                <td>м2</td>
+                <td>расход (л/м2)</td>
+                <td>литров</td>
+                <td>поставщик</td>
+                <td>банки</td>
+                <td>цена итого</td>
+                <td>цена за м2</td>
+                <td>остаток</td>
+            </thead>
+            <tr>
+                <td><?= $squareMeters ?></td>
+                <td><?= $consumption ?></td>
+                <td><?= $needLiters ?></td>
+                <td><?= $shopName ?></td>
+                <td style="min-width: 100px"><?= $goods ?></td>
+                <td><?= $totalPrice ?></td>
+                <td><?= $pricePerMeter ?></td>
+                <td><?= $remain ?></td>
+            </tr>
+        </table>
+    <?php endif ?>
     </body>
 </html>
