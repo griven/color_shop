@@ -55,84 +55,9 @@ class Calculate
 
     public function getBestShopSet(int $liters, string $shopName)
     {
+        $this->recalculatePricePerLiter(); // это дергается вообще отдельно, но для примера сойдет
         $goods = $this->dao->getGoods($shopName);
-        $goods = self::sortGoods($goods);
-        $goods = self::filterByPrice($goods);
-        $goods = self::filterByPricePerLiter($goods);
+        return (new ShopSet($goods))->getBestSet($liters);
 
-        return $goods;
-    }
-
-    /**
-     * Сортировка по размеру
-     *
-     * @param array $goods
-     * @return array
-     */
-    public static function sortGoods(array $goods)
-    {
-        $sortedGoods = [];
-        foreach ($goods as $oneGoods) {
-            switch ($oneGoods['size']) {
-                case 's':
-                    $position = 0;
-                    break;
-                case 'm':
-                    $position = 1;
-                    break;
-                case 'l':
-                    $position = 2;
-                    break;
-                case 'xl':
-                    $position = 3;
-                    break;
-                default:
-                    $position = false;
-            }
-            if ($position !== false) {
-                $sortedGoods[$position] = $oneGoods;
-            }
-        }
-
-        return $sortedGoods;
-    }
-
-    /**
-     * Фильтрация по цене
-     *
-     * @param array $sortedGoods
-     * @return array
-     */
-    public static function filterByPrice(array $sortedGoods)
-    {
-        $result = [];
-        $goods = array_reverse($sortedGoods);
-        foreach ($goods as $oneGoods) {
-            if (!isset($minPrice) || $oneGoods['price'] < $minPrice) {
-                $minPrice = $oneGoods['price'];
-                $result[] = $oneGoods;
-            }
-        }
-
-        return array_reverse($result);
-    }
-
-    /**
-     * Фильтрация по цене за литр
-     *
-     * @param array $sortedGoods
-     * @return array
-     */
-    public static function filterByPricePerLiter(array $sortedGoods)
-    {
-        $result = [];
-        foreach ($sortedGoods as $oneGoods) {
-            if (!isset($bestGoods) || $oneGoods['pricePerLiter'] < $bestGoods['pricePerLiter']) {
-                $bestGoods = $oneGoods;
-                $result[] = $oneGoods;
-            }
-        }
-
-        return $result;
     }
 }

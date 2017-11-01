@@ -56,12 +56,12 @@ class Dao
     {
         // здесь на больших данных лучше создавать временную таблицу и делать UPDATE через неё, а не в цикле (я не успею доделать по-нормальному)
         $sql = "UPDATE goods 
-            SET price_per_meter=?
+            SET price_per_liter=?
             WHERE id=?";
 
         $query = $this->db->prepare($sql);
-        foreach ($updateInfo as $id => $pricePerMeter) {
-            $query->execute([$pricePerMeter, $id]);
+        foreach ($updateInfo as $id => $pricePerLiter) {
+            $query->execute([$pricePerLiter, $id]);
         }
     }
 }

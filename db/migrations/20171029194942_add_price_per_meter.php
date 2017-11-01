@@ -29,7 +29,7 @@ class AddPricePerMeter extends AbstractMigration
     public function change()
     {
         $this->table('goods')
-            ->addColumn('price_per_meter', 'float', ['null'=> true, 'comment' => 'цена за квадратный метр'])
+            ->addColumn('price_per_liter', 'float', ['null'=> true, 'comment' => 'цена за литр'])
             ->save();
     }
 }

@@ -18,5 +18,5 @@ $app->get('/', function (Request $request, Response $response) {
 
 $app->get('/goods', function () {
 //    (new Calculate(new Dao($this->db)))->recalculatePricePerLiter();
-    (new Calculate(new Dao($this->db)))->getBestShopSet(11,'beta');
+    print_r((new Calculate(new Dao($this->db)))->getBestShopSet(11,'alpha'));
 });
