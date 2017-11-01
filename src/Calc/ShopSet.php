@@ -13,13 +13,6 @@ class ShopSet
         $this->sortGoods($goods);
     }
 
-    public function getBestSet(int $liters)
-    {
-        $this->filterByPrice()->filterByPricePerLiter();
-
-        return ;
-    }
-
     /**
      * Сортировка по размеру
      *
@@ -88,5 +81,46 @@ class ShopSet
 
         $this->sortedGoods = $result;
         return $this;
+    }
+
+    public function getBestSet($liters)
+    {
+        $firstSet = $this->getBestSetRecursively($liters);
+
+        $bestSet = [];
+        foreach ($firstSet as $set) {
+            foreach ($set as $type => $count) {
+                $bestSet[$type] = ($bestSet[$type] ?? 0) + $count;
+            }
+        }
+
+        return $bestSet;
+    }
+
+    /**
+     * Рекурсивно подбираем лучший набор
+     * 
+     * @param int $liters
+     * @return array
+     */
+    public function getBestSetRecursively(int $liters)
+    {
+        $reverseGoods = array_reverse($this->sortedGoods);
+        $oneGoods = [];
+        foreach ($reverseGoods as $oneGoods) {
+            $goodsCount = floor($liters / $oneGoods['volume']);
+            if ($goodsCount) {
+                $remainder = $liters - $goodsCount * $oneGoods['volume'];
+                if ($remainder) {
+                    $result = array_merge_recursive([[$oneGoods['type'] => $goodsCount]], $this->getBestSetRecursively($remainder));
+                } else {
+                    $result = [[$oneGoods['type'] => $goodsCount]];
+                }
+                return $result;
+            }
+        }
+
+        $result = [[$oneGoods['type'] => 1]];
+        return $result;
     }
 }

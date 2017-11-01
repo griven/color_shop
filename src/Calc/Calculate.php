@@ -57,7 +57,7 @@ class Calculate
     {
         $this->recalculatePricePerLiter(); // это дергается вообще отдельно, но для примера сойдет
         $goods = $this->dao->getGoods($shopName);
-        return (new ShopSet($goods))->getBestSet($liters);
+        return (new ShopSet($goods))->filterByPrice()->filterByPricePerLiter()->getBestSet($liters);
 
     }
 }
