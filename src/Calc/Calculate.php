@@ -44,11 +44,11 @@ class Calculate
     {
         $consumption = $this->dao->getConsumption();
         $needLiters = $squareMeters * $consumption;
-        $shopName = 'alfa';
-        $goods = implode(',', [5, 5]);
-        $totalPrice = 200;
-        $pricePerMeter = 20;
-        $remain = 10;
+        $shopName = 'alpha';
+        $goods = $this->getBestShopSet($needLiters, $shopName);
+        $totalPrice = '-';
+        $pricePerMeter = '-';
+        $remain = '-';
 
         return compact('squareMeters', 'consumption', 'needLiters', 'shopName', 'goods', 'totalPrice', 'pricePerMeter', 'remain');
     }

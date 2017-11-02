@@ -49,7 +49,7 @@
                    value="<?= $squareMeters ?>"
                 <?php endif ?>
             >м2
-            <input type="submit" placeholder="Рассчитать">
+            <input type="submit" style="min-width: 200px" placeholder="Рассчитать">
         </form>
     <?php if($needLiters): ?>
         <table>
@@ -68,7 +68,7 @@
                 <td><?= $consumption ?></td>
                 <td><?= $needLiters ?></td>
                 <td><?= $shopName ?></td>
-                <td style="min-width: 100px"><?= $goods ?></td>
+                <td style="min-width: 100px"><?= print_r($goods,true) ?></td>
                 <td><?= $totalPrice ?></td>
                 <td><?= $pricePerMeter ?></td>
                 <td><?= $remain ?></td>
